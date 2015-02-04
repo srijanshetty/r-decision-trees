@@ -1,3 +1,7 @@
+# Read data
+setwd('.')
+pim = read.csv("./pim.txt", header=FALSE)
+
 # Grow and Prune
 library(rpart)
 
@@ -15,7 +19,7 @@ na.pim[na.pim$insulin == 0, "insulin"] = NA
 fit = rpart(formula = class ~ pregnant + glucose + bp + triceps + insulin + bmi + diabetes + age, method="class", data=na.pim, parms = list(split="gini"), control = rpart.control(xval = 5, minsplit = 1, cp = 0))
 plot(fit, uniform=TRUE, main = "Complete Tree - Entropy")
 text(fit, use.n=TRUE, all=TRUE, cex=0.4)
-printcp(pfit)
+printcp(fit)
 
 # We find the cp of the tree with minimum xerror and prune the tree
 pfit = prune(fit, cp=fit$cptable[which.min(fit$cptable[,"xerror"]), "CP"])

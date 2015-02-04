@@ -1,3 +1,7 @@
+# Read data
+setwd('.')
+pim = read.csv("./pim.txt", header=FALSE)
+
 # Threshold on the number of vectors at a node with information
 library(rpart)
 
